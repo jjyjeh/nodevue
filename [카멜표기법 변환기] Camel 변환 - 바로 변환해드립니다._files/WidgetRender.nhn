@@ -1,0 +1,1 @@
+document.write('<iframe style="height:282px; width:171px;" src="https://blog.naver.com/connect/WidgetView.naver?blogId=pyh1987&widgetSeq=2&authCode=e49fb9d507551fe65d63d7a72e8dd6a4fa8d8b5" scrolling="no" frameborder="0" allowtransparency="true"></iframe>');

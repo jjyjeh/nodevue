@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<div class="contents_style">
+	<table style="width: 95%;">
+		<colgroup>
+			<col width="50%">
+
+			<col width="50%">
+		</colgroup>
+		<thead>
+			<tr>
+				<th colspan="2">하단에 카멜 변환을 원하는 데이터를 입력하세요. <br>(CAMEL_TEST --&gt; camelTest)</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><textarea id="camel_start1"
+						style="width: 90%;height: 200px; line-height:1.2; resize:none;padding:10px;"
+						placeholder="이곳에 변경하실 데이터를 입력해주세요."></textarea></td>
+				<td><textarea id="camel_result1"
+						style="width: 90%;height: 200px; line-height:1.2; resize:none;padding:10px;"
+						placeholder="이곳에 변경된 데이터가 출력됩니다."></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center; height: 24px;">
+					<input type="button" class="button" value="초기화" id="camel1_trash">
+					<input type="button" class="button" value="복사" id="camel1copy">
+
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center; height: 42px;">
+					<p> <b style="color:red;">복사버튼은 현재 크롬에서만 지원가능합니다.</b></p>
+					<p></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p style="text-align: center;">
+	</p>
+	<p></p>
+	<center>
+
+		<script type="text/javascript" src="./[카멜표기법 변환기] Camel 변환 - 바로 변환해드립니다._files/ad.min.js.다운로드"></script>
+	</center>
+	<p></p>
+	<hr align="center">
+	<p></p>
+	<table style="width: 95%;">
+		<colgroup>
+			<col width="50%">
+
+			<col width="50%">
+		</colgroup>
+		<thead>
+			<tr>
+				<th colspan="2">
+					<p>하단에 카멜 변환을 원하는 데이터를 입력하세요. <br>(camelTest --&gt; CAMEL_TEST)</p>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><textarea id="camel_start2"
+						style="width: 90%;height: 200px; line-height:1.2; resize:none;padding:10px;"
+						placeholder="이곳에 변경하실 데이터를 입력해주세요."></textarea></td>
+				<td><textarea id="camel_result2"
+						style="width: 90%;height: 200px; line-height:1.2; resize:none;padding:10px;"
+						placeholder="이곳에 변경된 데이터가 출력됩니다."></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align:center;">
+					<input type="button" class="button" value="초기화" id="camel2_trash">
+					<input type="button" class="button" value="복사" id="camel2copy">
+
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align:center;"> <b style="color:red;">복사버튼은 현재 크롬에서만 지원가능합니다.</b></td>
+			</tr>
+		</tbody>
+	</table>
+	<script>
+
+		var camel1_start = document.getElementById('camel_start1');
+		var camel1_result = document.getElementById('camel_result1');
+
+		var camel2_start = document.getElementById('camel_start2');
+		var camel2_result = document.getElementById('camel_result2');
+		camel1_start.onkeyup = function () {
+			camel1_result.value = convCamel(camel1_start.value);
+
+		}
+
+		camel2_start.onkeyup = function () {
+			camel2_result.value = convCamelup(camel2_start.value);
+
+		}
+
+		document.getElementById('camel1_trash').onclick = function () {
+			camel1_trash();
+		}
+		document.getElementById('camel1copy').onclick = function () {
+			camel1copy();
+		}
+		document.getElementById('camel2_trash').onclick = function () {
+			camel2_trash();
+		}
+		document.getElementById('camel2copy').onclick = function () {
+			camel2copy();
+		}
+
+
+		//Camel변환
+		function convCamel(str) {
+			var before = str.toLowerCase();
+			var after = "";
+			var bs = before.split("_");
+
+			if (bs.length < 2) { return bs; } for (var i = 0; i < bs.length; i++) {
+				if (bs[i].length > 0) {
+					if (i == 0)
+						after += bs[i].toLowerCase();
+					else
+						after += bs[i].toLowerCase().substr(0, 1).toUpperCase() + bs[i].substr(1, bs[i].length - 1);
+				}
+			}
+			return after;
+		}
+
+
+		function convCamelup(str) {
+			return str.replace(/([A-Z])/g, function (arg) {
+				return "_" + arg.toLowerCase();
+			}).toUpperCase();
+		};
+
+
+		function camel1_trash() {
+			document.getElementById("camel_start1").value = "";
+			document.getElementById("camel_result1").value = "";
+		}
+
+		function camel1copy() {
+			var copy = document.getElementById("camel_result1");
+			copy.select();
+			document.execCommand("copy");
+		}
+
+
+
+		function camel2_trash() {
+			document.getElementById("camel_start2").value = "";
+			document.getElementById("camel_result2").value = "";
+		}
+
+		function camel2copy() {
+			var copy = document.getElementById("camel_result2");
+			copy.select();
+			document.execCommand("copy");
+		}
+	</script>
+	<p><br></p>
+</div>
+
+</html>

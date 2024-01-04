@@ -1,0 +1,52 @@
+function toggleFolder (category) {
+    var categoryNode = document.getElementById("category_" + category);
+    var imgNode = categoryNode.getElementsByTagName("img")[0];
+    var imgSrc = imgNode.src;
+
+    switch (imgNode.src.substr(imgSrc.length - 10, 6)) {
+        case "isleaf":
+            return;
+        case "closed":
+            expandNode(category, imgNode);
+            return;
+        case "opened":
+            collapseNode(category, imgNode);
+            return;
+    }
+}
+
+function expandNode (category, imgNode) {
+    var imgSrc = imgNode.src;
+    imgNode.src = replaceImgSrcName(imgSrc, "opened");
+
+    var childrenDivNode = document.getElementById("category_" + category + "_children");
+    childrenDivNode.style.display = "block";
+}
+
+function collapseNode (category, imgNode) {
+    var imgSrc = imgNode.src;
+    imgNode.src = replaceImgSrcName(imgSrc, "closed");
+
+    var childrenDivNode = document.getElementById("category_" + category + "_children");
+    childrenDivNode.style.display = "none";
+}
+
+function replaceImgSrcName (url, to) {
+    return url.substring(0, url.length - 10) + to + ".gif";
+}
+
+function expandTree () {
+    // expand all
+    var treeNode = document.getElementById("treeComponent");
+    var categoryNodes = treeNode.querySelectorAll("table[id^='category_']:not([id='category_0'])");
+    var categoryNodeList = Array.prototype.slice.call(categoryNodes);
+
+    for (let i = 0; i < categoryNodeList.length; i ++) {
+        var categoryNode = categoryNodeList[i];
+        var imgNode = categoryNode.getElementsByTagName("img")[0];
+        var imgSrc = imgNode.src;
+        if (imgNode.src.substr(imgSrc.length - 10, 6) !== 'isleaf') {
+            expandNode(categoryNode.id.split('_')[1], imgNode);
+        }
+    }
+}
